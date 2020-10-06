@@ -1,0 +1,83 @@
+﻿
+    <script>
+
+    function submitForm() {
+        let FirstName = document.getElementById('FirstNameElem');
+        let LastName = document.getElementById('LastNameElem');
+        let Email = document.getElementById('EmailElem');
+        let Password = document.getElementById('PasswordElem');
+        let ConfirmPassword = document.getElementById('ConfirmPasswordElem');
+
+        FirstName.value = FirstName.value.toUpperCase();
+        LastName.value = LastName.value.toUpperCase();
+
+
+        @{
+            bool BEmail = false;
+            bool BPass = false;
+            }
+
+        //var emailPattern = new RegExp("^\w{2,}@@\w{2,}.\w{2,}$");
+        //var passPattern = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$");
+
+        //var Email.match(emailPattern);
+        //var PassRE = Password.match(passPattern);
+
+        if (FirstName.value == null || FirstName.value == '' || FirstName.value.length < 2)
+        {
+                alert("Please check the FIRSTNAME field for errors.");
+                return false;
+        }
+        if (LastName.value == null || LastName.value == '' || LastName.value.length < 2)
+        {
+                alert("Please check the LASTNAME field for errors.");
+                return false;
+        }
+
+        if (Email.value.match(/^\w{2,}@@\w{2,}.\w{2,}$/))
+        {
+             @BEmail = true;
+        }
+        else
+        {
+            alert("Please check the EMAIL field for errors.");
+            return false;
+        }
+        if (Password.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$/))
+        {
+            @BPass = true;
+        }
+        else
+        {
+            alert("Please check the PASSWORD field for errors.");
+            return false;
+        }
+        if (Password.value != ConfirmPassword.value) {
+            alert("Password does not match, please try again.");
+            return false;
+        }
+        
+    }
+
+    </script>
+
+<form method="post" action="/home/submit" onsubmit="return submitForm()">
+    First Name: <br />
+    <input type="text" name="FirstName" id="FirstNameElem" /><br />
+
+    Last Name: <br />
+    <input type="text" name="LastName" id="LastNameElem" /><br />
+
+    Email: <br />
+    <input type="text" name="Email" id="EmailElem" /><br />
+
+    Password: <br />
+    <input type="text" name="Password" id="PasswordElem" /><br />
+
+    Confirm Password: <br />
+    <input type="text" name="ConfirmPassword" id="ConfirmPasswordElem" /><br />
+
+    <br />
+    <input type="submit" />
+
+</form>
